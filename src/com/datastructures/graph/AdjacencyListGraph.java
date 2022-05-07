@@ -1,11 +1,16 @@
 package com.datastructures.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AdjacencyListGraph {
-    private Map<AdjacencyListGraphVertex, List<AdjacencyListGraphVertex>> adjacencyList;
+    private final Map<AdjacencyListGraphVertex, List<AdjacencyListGraphVertex>> adjacencyList;
+    
+    public AdjacencyListGraph() {
+        this.adjacencyList = new HashMap<>();
+    }
 
     public void addVertex(String label) {
         AdjacencyListGraphVertex vertex = new AdjacencyListGraphVertex(label);

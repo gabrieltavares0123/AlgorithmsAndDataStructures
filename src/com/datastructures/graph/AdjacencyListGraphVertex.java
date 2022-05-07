@@ -9,6 +9,10 @@ public class AdjacencyListGraphVertex {
         this.label = label;
     }
 
+    public String getLabel() {
+        return label;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
