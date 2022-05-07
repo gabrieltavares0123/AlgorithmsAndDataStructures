@@ -183,13 +183,49 @@ public class BST {
         }
     }
 
-    public static Node createSampleBST() {
+    public void preOrder() {
+        preOrder(this.root);
+    }
+
+    private void preOrder(Node node) {
+        if (node != null) {
+            System.out.printf("%d->", node.data);
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
+
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    private void inOrder(Node node) {
+        if (node != null) {
+            preOrder(node.left);
+            System.out.printf("%d->", node.data);
+            preOrder(node.right);
+        }
+    }
+
+    public void posOrder() {
+        posOrder(root);
+    }
+
+    private void posOrder(Node node) {
+        if (node != null) {
+            posOrder(node.left);
+            posOrder(node.right);
+            System.out.printf("%d->", node.data);
+        }
+    }
+
+    public static BST createBST(int[] vector) {
         BST bst = new BST();
 
-        int[] v = { 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74 };
-        for (int n: v) {
+        for (int n: vector) {
             bst.interactiveInsertion(n);
         }
-        return bst.getRoot();
+
+        return bst;
     }
 }
