@@ -1,13 +1,13 @@
 package com.datastructures.bst;
 
-public class Node {
-    int data = 0;
-    Node parent;
-    Node left;
-    Node right;
+public class BSTNode {
+    int value = 0;
+    BSTNode parent;
+    BSTNode left;
+    BSTNode right;
 
-    public Node(int data) {
-        this.data = data;
+    public BSTNode(int value) {
+        this.value = value;
     }
 
     public boolean isLeaf() {

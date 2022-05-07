@@ -1,36 +1,36 @@
 package com.datastructures.bst;
 
 public class BST {
-    private Node root;
+    private BSTNode root;
 
     public boolean isEmpty() {
         return this.root == null;
     }
 
-    public Node getRoot() {
+    public BSTNode getRoot() {
         return this.root;
     }
 
     public void interactiveInsertion(int toInsert) {
         if (root == null) {
-            this.root = new Node(toInsert);
+            this.root = new BSTNode(toInsert);
         } else {
-            Node aux = root;
+            BSTNode aux = root;
 
             while (aux != null) {
-                if (toInsert < aux.data) {
+                if (toInsert < aux.value) {
                     if (aux.left == null) {
-                        Node newNode = new Node(toInsert);
-                        aux.left = newNode;
-                        newNode.parent = aux;
+                        BSTNode newBSTNode = new BSTNode(toInsert);
+                        aux.left = newBSTNode;
+                        newBSTNode.parent = aux;
                         return;
                     }
                     aux = aux.left;
                 } else {
                     if (aux.right == null) {
-                        Node newNode = new Node(toInsert);
-                        aux.right = newNode;
-                        newNode.parent = aux;
+                        BSTNode newBSTNode = new BSTNode(toInsert);
+                        aux.right = newBSTNode;
+                        newBSTNode.parent = aux;
                         return;
                     }
                     aux = aux.right;
@@ -41,75 +41,75 @@ public class BST {
 
     public void recursiveInsertion(int toInsert) {
         if (root == null) {
-            this.root = new Node(toInsert);
+            this.root = new BSTNode(toInsert);
         } else {
             recursiveInsertion(root, toInsert);
         }
     }
 
-    private void recursiveInsertion(Node node, int data) {
-        if (data < node.data) {
-            if (node.left == null) {
-                Node newNode = new Node(data);
-                newNode.parent = node;
-                node.left = newNode;
+    private void recursiveInsertion(BSTNode BSTNode, int data) {
+        if (data < BSTNode.value) {
+            if (BSTNode.left == null) {
+                BSTNode newBSTNode = new BSTNode(data);
+                newBSTNode.parent = BSTNode;
+                BSTNode.left = newBSTNode;
                 return;
             }
-            recursiveInsertion(node.left, data);
+            recursiveInsertion(BSTNode.left, data);
         } else {
-            if (node.right == null) {
-                Node newNode = new Node(data);
-                newNode.parent = node;
-                node.right = newNode;
+            if (BSTNode.right == null) {
+                BSTNode newBSTNode = new BSTNode(data);
+                newBSTNode.parent = BSTNode;
+                BSTNode.right = newBSTNode;
                 return;
             }
-            recursiveInsertion(node.right, data);
+            recursiveInsertion(BSTNode.right, data);
         }
     }
 
-    public Node iterativeSearch(int toFind) {
-        Node aux = root;
+    public BSTNode iterativeSearch(int toFind) {
+        BSTNode aux = root;
 
         while (aux != null) {
-            if (aux.data == toFind) return aux;
-            if (toFind < aux.data) aux = aux.left;
-            if (toFind > aux.data) aux = aux.right;
+            if (aux.value == toFind) return aux;
+            if (toFind < aux.value) aux = aux.left;
+            if (toFind > aux.value) aux = aux.right;
         }
 
         return null;
     }
 
-    public Node recursiveSearch(int toFind) {
+    public BSTNode recursiveSearch(int toFind) {
         return recursiveSearch(root, toFind);
     }
 
-    public Node recursiveSearch(Node node, int toFind) {
-        if (node == null) return null;
-        else if (node.data == toFind) return node;
-        else if (toFind < node.data) return recursiveSearch(node.left, toFind);
-        else return recursiveSearch(node.right, toFind);
+    public BSTNode recursiveSearch(BSTNode BSTNode, int toFind) {
+        if (BSTNode == null) return null;
+        else if (BSTNode.value == toFind) return BSTNode;
+        else if (toFind < BSTNode.value) return recursiveSearch(BSTNode.left, toFind);
+        else return recursiveSearch(BSTNode.right, toFind);
     }
 
-    public Node findMin(Node node) {
+    public BSTNode findMin(BSTNode BSTNode) {
         if (isEmpty()) return null;
-        else if (node.left == null) return node;
-        else return findMin(node.left);
+        else if (BSTNode.left == null) return BSTNode;
+        else return findMin(BSTNode.left);
     }
 
-    public Node findMax(Node node) {
+    public BSTNode findMax(BSTNode BSTNode) {
         if (isEmpty()) return null;
-        else if (node.right == null) return node;
-        else return findMax(node.right);
+        else if (BSTNode.right == null) return BSTNode;
+        else return findMax(BSTNode.right);
     }
 
-    public Node finSuccessor(Node node) {
+    public BSTNode finSuccessor(BSTNode BSTNode) {
         if (isEmpty()) return null;
 
-        if (node.right != null) {
-            return findMin(node.right);
+        if (BSTNode.right != null) {
+            return findMin(BSTNode.right);
         } else {
-            Node aux = node.parent;
-            while (aux != null && aux.data < node.data) {
+            BSTNode aux = BSTNode.parent;
+            while (aux != null && aux.value < BSTNode.value) {
                 aux = aux.parent;
             }
 
@@ -117,14 +117,14 @@ public class BST {
         }
     }
 
-    public Node findPredecessor(Node node) {
+    public BSTNode findPredecessor(BSTNode BSTNode) {
         if (isEmpty()) return null;
 
-        if (node.left != null) {
-            return findMax(node.left);
+        if (BSTNode.left != null) {
+            return findMax(BSTNode.left);
         } else {
-            Node aux = node.parent;
-            while (aux != null && aux.data > node.data) {
+            BSTNode aux = BSTNode.parent;
+            while (aux != null && aux.value > BSTNode.value) {
                 aux = aux.parent;
             }
 
@@ -136,17 +136,17 @@ public class BST {
         return height(root);
     }
 
-    private int height(Node node) {
-        if (node == null) return -1;
-        else return 1 + Math.max(height(node.left), height(node.right));
+    private int height(BSTNode BSTNode) {
+        if (BSTNode == null) return -1;
+        else return 1 + Math.max(height(BSTNode.left), height(BSTNode.right));
     }
 
-    public void remove(Node toRemove) {
+    public void remove(BSTNode toRemove) {
         if (toRemove.isLeaf()) {
             if (toRemove == this.root) {
                 this.root = null;
             } else {
-                if (toRemove.data < toRemove.parent.data) {
+                if (toRemove.value < toRemove.parent.value) {
                     toRemove.parent.left = null;
                 } else {
                     toRemove.parent.right = null;
@@ -158,7 +158,7 @@ public class BST {
                 this.root.parent = null;
             } else {
                 toRemove.left.parent = toRemove.parent;
-                if (toRemove.data < toRemove.parent.data) {
+                if (toRemove.value < toRemove.parent.value) {
                     toRemove.parent.left = toRemove.left;
                 } else {
                     toRemove.parent.right = toRemove.left;
@@ -170,15 +170,15 @@ public class BST {
                 this.root.parent = null;
             } else {
                 toRemove.parent.right = toRemove.parent;
-                if (toRemove.data < toRemove.parent.data) {
+                if (toRemove.value < toRemove.parent.value) {
                     toRemove.parent.left = toRemove.right;
                 } else {
                     toRemove.parent.right = toRemove.right;
                 }
             }
         } else {
-            Node successor = finSuccessor(toRemove);
-            toRemove.data = successor.data;
+            BSTNode successor = finSuccessor(toRemove);
+            toRemove.value = successor.value;
             remove(successor);
         }
     }
@@ -187,11 +187,11 @@ public class BST {
         preOrder(this.root);
     }
 
-    private void preOrder(Node node) {
-        if (node != null) {
-            System.out.printf("%d->", node.data);
-            preOrder(node.left);
-            preOrder(node.right);
+    private void preOrder(BSTNode BSTNode) {
+        if (BSTNode != null) {
+            System.out.printf("%d->", BSTNode.value);
+            preOrder(BSTNode.left);
+            preOrder(BSTNode.right);
         }
     }
 
@@ -199,11 +199,11 @@ public class BST {
         inOrder(root);
     }
 
-    private void inOrder(Node node) {
-        if (node != null) {
-            preOrder(node.left);
-            System.out.printf("%d->", node.data);
-            preOrder(node.right);
+    private void inOrder(BSTNode BSTNode) {
+        if (BSTNode != null) {
+            preOrder(BSTNode.left);
+            System.out.printf("%d->", BSTNode.value);
+            preOrder(BSTNode.right);
         }
     }
 
@@ -211,11 +211,11 @@ public class BST {
         posOrder(root);
     }
 
-    private void posOrder(Node node) {
-        if (node != null) {
-            posOrder(node.left);
-            posOrder(node.right);
-            System.out.printf("%d->", node.data);
+    private void posOrder(BSTNode BSTNode) {
+        if (BSTNode != null) {
+            posOrder(BSTNode.left);
+            posOrder(BSTNode.right);
+            System.out.printf("%d->", BSTNode.value);
         }
     }
 
