@@ -7,22 +7,23 @@ import com.datastructures.graph.AdjacencyListGraphVertex;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
-import java.util.Stack;
 
-public class DFS_DepthFirstSearch {
-    public static Set<String> dfs(AdjacencyListGraph graph, String rootLabel) {
+public class BFS_BreadthFirstSearch {
+    public static Set<String> bfs(AdjacencyListGraph graph, String rootLabel) {
         Set<String> visited = new LinkedHashSet<>();
-        Stack<String> stack = new Stack<>();
-        stack.push(rootLabel);
-
-        while (!stack.isEmpty()) {
-            String current = stack.pop();
-            if (!visited.contains(current)) {
-                visited.add(current);
-                for (AdjacencyListGraphVertex v : graph.getAdjacentVertices(current)) {
-                    stack.push(v.getLabel());
+        Queue<String> queue = new LinkedList<>();
+        queue.add(rootLabel);
+        visited.add(rootLabel);
+        while (!queue.isEmpty()) {
+            String current = queue.poll();
+            for (AdjacencyListGraphVertex v : graph.getAdjacentVertices(current)) {
+                if (!visited.contains(v.getLabel())) {
+                    visited.add(v.getLabel());
+                    queue.add(v.getLabel());
                 }
             }
         }
@@ -53,7 +54,7 @@ public class DFS_DepthFirstSearch {
         expected.add("Alice");
         expected.add("Mark");
 
-        Set<String> result = DFS_DepthFirstSearch.dfs(graph, "Bob");
+        Set<String> result = BFS_BreadthFirstSearch.bfs(graph, "Bob");
 
         System.out.println(expected.equals(result));
     }
