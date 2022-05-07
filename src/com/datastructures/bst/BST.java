@@ -7,6 +7,10 @@ public class BST {
         return this.root == null;
     }
 
+    public Node getRoot() {
+        return this.root;
+    }
+
     public void interactiveInsertion(int toInsert) {
         if (root == null) {
             this.root = new Node(toInsert);
@@ -180,6 +184,12 @@ public class BST {
     }
 
     public static Node createSampleBST() {
-        return new Node(0);
+        BST bst = new BST();
+
+        int[] v = { 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74 };
+        for (int n: v) {
+            bst.interactiveInsertion(n);
+        }
+        return bst.getRoot();
     }
 }
