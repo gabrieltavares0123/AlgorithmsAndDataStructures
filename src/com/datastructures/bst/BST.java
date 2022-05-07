@@ -8,19 +8,17 @@ public class BST {
     }
 
     public void interactiveInsertion(int toInsert) {
-        // Se a árvore está vazia, cria o nó inicial.
         if (root == null) {
             this.root = new Node(toInsert);
         } else {
             Node aux = root;
 
             while (aux != null) {
-                if (toInsert < aux.data) { // Checa se deve navegar para esquerda.
-                    if (aux.left == null) { // Checa se chegou na posição de inserção.
+                if (toInsert < aux.data) {
+                    if (aux.left == null) {
                         Node newNode = new Node(toInsert);
                         aux.left = newNode;
                         newNode.parent = aux;
-                        // Inserções acontecem nas folhas. Chegando nesse ponto, não é mais necessário caminhar na árvore.
                         return;
                     }
                     aux = aux.left;
@@ -88,31 +86,24 @@ public class BST {
         else return recursiveSearch(node.right, toFind);
     }
 
-    // O mínimo é o nó folha mais à esquerda da árvore.
     public Node findMin(Node node) {
         if (isEmpty()) return null;
         else if (node.left == null) return node;
         else return findMin(node.left);
     }
 
-    // O máximo é o nó mais à direita na árvore.
     public Node findMax(Node node) {
         if (isEmpty()) return null;
         else if (node.right == null) return node;
         else return findMax(node.right);
     }
 
-    // O sucesor é o menor valor dentre os valores maiores que o nó desejado.
     public Node finSuccessor(Node node) {
         if (isEmpty()) return null;
 
-        // Se eu tenho uma sub-árvore à direita.
         if (node.right != null) {
             return findMin(node.right);
-        }
-        /* Se eu não tenho sub-árvore à direita, procuro dentre os nós pai o próximo menor nó entre os maiores
-         maior que o nó desejado.*/
-        else {
+        } else {
             Node aux = node.parent;
             while (aux != null && aux.data < node.data) {
                 aux = aux.parent;
@@ -122,17 +113,12 @@ public class BST {
         }
     }
 
-    // O predecessor é o maior valor dentre os valores menores do que o do nó desejado.
     public Node findPredecessor(Node node) {
         if (isEmpty()) return null;
 
-        // Se eu tenho sub-árvore à esquerda.
         if (node.left != null) {
             return findMax(node.left);
-        }
-        /* Se eu não tenho sub-árvore à esquerda, procuro dentre os nós pai o próximo maior nó entre os menores
-         menor que o nó desejado.*/
-        else {
+        } else {
             Node aux = node.parent;
             while (aux != null && aux.data > node.data) {
                 aux = aux.parent;
