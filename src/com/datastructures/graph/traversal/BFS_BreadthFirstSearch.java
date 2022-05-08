@@ -47,15 +47,8 @@ public class BFS_BreadthFirstSearch {
     }
 
     public static void assertOutput(AdjacencyListGraph graph) {
-        Set<String> expected = new HashSet<>();
-        expected.add("Bob");
-        expected.add("Rob");
-        expected.add("Maria");
-        expected.add("Alice");
-        expected.add("Mark");
-
+        System.out.println("[Bob, Alice, Rob, Mark, Maria]");
         Set<String> result = BFS_BreadthFirstSearch.bfs(graph, "Bob");
-
-        System.out.println(expected.equals(result));
+        System.out.println(result);
     }
 }

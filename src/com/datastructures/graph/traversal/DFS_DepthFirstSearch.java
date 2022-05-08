@@ -46,15 +46,8 @@ public class DFS_DepthFirstSearch {
     }
 
     public static void assertOutput(AdjacencyListGraph graph) {
-        Set<String> expected = new HashSet<>();
-        expected.add("Bob");
-        expected.add("Rob");
-        expected.add("Maria");
-        expected.add("Alice");
-        expected.add("Mark");
-
+        System.out.println("[Bob, Rob, Maria, Alice, Mark]");
         Set<String> result = DFS_DepthFirstSearch.dfs(graph, "Bob");
-
-        System.out.println(expected.equals(result));
+        System.out.println(result);
     }
 }
